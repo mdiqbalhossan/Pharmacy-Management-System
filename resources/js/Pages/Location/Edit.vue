@@ -5,28 +5,33 @@ import BackButton from "@/Components/BackButton.vue";
 import InputError from "@/Components/InputError.vue";
 import TextInput from "@/Components/forms/TextInput.vue";
 import Label from "@/Components/forms/Label.vue";
+const props = defineProps({
+    location: {
+        type: Object,
+        default: () => ({}),
+    },
+});
 const form = useForm({
-    name: "",
-    status: false,
+    name: props.location?.name,
+    status: props.location?.status == 1 ? "true" : "false",
 });
 const submit = () => {
-    form.post(route("category.store"));
+    form.put(route("location.update", props.location?.id));
 };
 </script>
 <template>
-    <Head title="Category" />
+    <Head title="Location Rack Edit" />
     <AuthenticatedLayout>
         <div
             class="w-full max-w-md bg-white border mx-auto my-5 border-gray-200 rounded-lg shadow-md sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700"
         >
             <form class="space-y-6" @submit.prevent="submit">
                 <h5 class="text-xl font-medium text-gray-900 dark:text-white">
-                    Create Category
-                    <BackButton :url="route('category.index')" />
+                    Edit Location Rack
+                    <BackButton :url="route('location.index')" />
                 </h5>
                 <div>
-                    <Label value="Category Name" id="name" />
-
+                    <Label value="Rack Name" id="name" />
                     <TextInput
                         id="name"
                         type="text"
@@ -49,7 +54,6 @@ const submit = () => {
                                 v-model="form.status"
                             />
                         </div>
-
                         <Label
                             value="Publish"
                             id="remember"
@@ -63,7 +67,7 @@ const submit = () => {
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
-                    Create
+                    Update
                 </button>
             </form>
         </div>

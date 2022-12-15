@@ -10,22 +10,22 @@ const form = useForm({
     status: false,
 });
 const submit = () => {
-    form.post(route("category.store"));
+    form.post(route("location.store"));
 };
 </script>
 <template>
-    <Head title="Category" />
+    <Head title="Location Rack Create" />
     <AuthenticatedLayout>
         <div
             class="w-full max-w-md bg-white border mx-auto my-5 border-gray-200 rounded-lg shadow-md sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700"
         >
             <form class="space-y-6" @submit.prevent="submit">
                 <h5 class="text-xl font-medium text-gray-900 dark:text-white">
-                    Create Category
-                    <BackButton :url="route('category.index')" />
+                    Create Location Rack
+                    <BackButton :url="route('location.index')" />
                 </h5>
                 <div>
-                    <Label value="Category Name" id="name" />
+                    <Label value="Rack Name" id="name" />
 
                     <TextInput
                         id="name"

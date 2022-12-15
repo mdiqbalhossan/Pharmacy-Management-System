@@ -7,7 +7,7 @@ import Paginate from "@/Components/Paginate.vue";
 import Icon from "@/Components/Icon.vue";
 import DeleteModal from "@/Components/DeleteModal.vue";
 defineProps({
-    categories: Object,
+    locations: Object,
 });
 const data = reactive({
     show: false,
@@ -19,12 +19,12 @@ const destroy = (cat_id) => {
 };
 </script>
 <template>
-    <Head title="Category" />
+    <Head title="Location Rack" />
     <AuthenticatedLayout>
         <DeleteModal
             v-model="data.show"
             :id="data.id"
-            route="category.destroy"
+            route="location.destroy"
         />
         <div class="p-2 my-4">
             <div
@@ -54,11 +54,11 @@ const destroy = (cat_id) => {
                         />
                     </div>
                     <Link
-                        :href="route('category.create')"
+                        :href="route('location.create')"
                         type="button"
                         class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                     >
-                        Create Category
+                        Create Location Rack
                     </Link>
                 </div>
                 <table
@@ -77,26 +77,26 @@ const destroy = (cat_id) => {
                     <tbody>
                         <tr
                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                            v-for="category in categories.data"
-                            :key="category.id"
+                            v-for="location in locations.data"
+                            :key="location.id"
                         >
                             <th
                                 scope="row"
                                 class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                             >
-                                {{ category.id }}
+                                {{ location.id }}
                             </th>
-                            <td class="py-4 px-6">{{ category.name }}</td>
+                            <td class="py-4 px-6">{{ location.name }}</td>
                             <td class="py-4 px-6">
                                 {{
-                                    category.status == 1
+                                    location.status == 1
                                         ? "Published"
                                         : "Pending"
                                 }}
                             </td>
                             <td class="py-4 px-6">
                                 <Link
-                                    :href="route('category.edit', category.id)"
+                                    :href="route('location.edit', location.id)"
                                     as="button"
                                     class="bg-indigo-600 hover:bg-indigo-800 px-1 py-1 rounded-md text-white font-semibold tracking-wide cursor-pointer"
                                 >
@@ -105,7 +105,7 @@ const destroy = (cat_id) => {
                                     />
                                 </Link>
                                 <button
-                                    @click="destroy(category.id)"
+                                    @click="destroy(location.id)"
                                     type="button"
                                     class="bg-red-600 hover:bg-red-800 px-1 py-1 mx-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"
                                 >
@@ -118,7 +118,7 @@ const destroy = (cat_id) => {
                     </tbody>
                 </table>
                 <div class="p-2">
-                    <Paginate :data="categories" />
+                    <Paginate :data="locations" />
                 </div>
             </div>
         </div>

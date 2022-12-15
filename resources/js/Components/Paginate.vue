@@ -6,15 +6,15 @@
         <span class="text-sm font-normal text-gray-500 dark:text-gray-400"
             >Showing
             <span class="font-semibold text-gray-900 dark:text-white"
-                >1-{{ categories.to }}</span
+                >1-{{ data.to }}</span
             >
             of
             <span class="font-semibold text-gray-900 dark:text-white">{{
-                categories.total
+                data.total
             }}</span></span
         >
         <ul class="inline-flex items-center -space-x-px">
-            <li v-for="(link, index) in categories.links" :key="index">
+            <li v-for="(link, index) in data.links" :key="index">
                 <Link
                     v-if="link.url"
                     :href="link.url"
@@ -34,6 +34,6 @@
 import { Link } from "@inertiajs/inertia-vue3";
 import { onMounted } from "vue";
 defineProps({
-    categories: Object,
+    data: Object,
 });
 </script>

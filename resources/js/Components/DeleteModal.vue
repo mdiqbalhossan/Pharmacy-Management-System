@@ -54,6 +54,10 @@ const props = defineProps({
         type: String,
         required: true,
     },
+    route: {
+        type: String,
+        required: true,
+    },
 });
 
 const emit = defineEmits(["update:modelValue"]);
@@ -63,7 +67,7 @@ const closeModal = () => {
 
 const deleteData = () => {
     emit("update:modelValue", false);
-    form.delete(route("category.destroy", props.id));
+    form.delete(route(props.route, props.id));
 };
 </script>
 

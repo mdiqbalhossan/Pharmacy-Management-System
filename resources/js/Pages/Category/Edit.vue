@@ -2,6 +2,9 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
 import BackButton from "@/Components/BackButton.vue";
+import InputError from "@/Components/InputError.vue";
+import TextInput from "@/Components/forms/TextInput.vue";
+import Label from "@/Components/forms/Label.vue";
 const props = defineProps({
     category: {
         type: Object,
@@ -28,19 +31,14 @@ const submit = () => {
                     <BackButton :url="route('category.index')" />
                 </h5>
                 <div>
-                    <label
-                        for="name"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >Category Name</label
-                    >
-                    <input
-                        type="text"
-                        name="name"
+                    <Label value="Category Name" id="name" />
+                    <TextInput
                         id="name"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                        placeholder="Laravel"
-                        required
+                        type="text"
                         v-model="form.name"
+                        required
+                        autofocus
+                        autocomplete="name"
                     />
                     <InputError class="mt-2" :message="form.errors.name" />
                 </div>
@@ -56,11 +54,11 @@ const submit = () => {
                                 v-model="form.status"
                             />
                         </div>
-                        <label
-                            for="remember"
-                            class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                            >Publish</label
-                        >
+                        <Label
+                            value="Publish"
+                            id="remember"
+                            customClass="ml-2"
+                        />
                     </div>
                 </div>
                 <button
